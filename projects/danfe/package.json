@@ -26,5 +26,10 @@
   "dependencies": {
     "tslib": "^2.6.0"
   },
+  "scripts": {
+    "build:watch": "ng build --watch --configuration development",
+    "watch:push": "nodemon --watch ../../dist/ng-danfe --exec \"yalc push\"",
+    "dev": "concurrently \"npm run build:watch\" \"npm run watch:push\""
+  },
   "sideEffects": false
 }

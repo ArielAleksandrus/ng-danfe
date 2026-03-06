@@ -6,7 +6,7 @@
     </div>
   }
 
-  @if (showPreview && data) {
+  @if (showPreview() && data) {
     <div class="preview" [class.nfce-preview]="data.tipo === 'nfce'">
       <h2>DANFE {{ data.tipo.toUpperCase() }}</h2>
 
@@ -76,7 +76,7 @@
     </div>
   }
 
-  @if (showActions && data) {
+  @if (showActions() && data) {
     <div class="actions">
       <button (click)="downloadPdf()">Baixar PDF</button>
       <button (click)="print()">Imprimir</button>

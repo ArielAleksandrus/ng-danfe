@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -7,34 +7,25 @@ import JsBarcode from 'jsbarcode';
 import { DanfeData } from './danfe-data';
 import { parseDanfeXml } from './danfe-parser';
 
-(pdfMake as any).vfs = (pdfFonts as any).pdfMake.vfs;
-
 @Component({
-  selector: 'lib-danfe',
+  selector: 'ng-danfe',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './danfe.html',
   styleUrl: './danfe.scss'
 })
-export class Danfe implements OnChanges {
-  @Input() xml?: string;
-  @Input() showPreview: boolean = true;
-  @Input() showActions: boolean = true;
+export class Danfe {
+  xmlStr = input<string>('');
+  showPreview = input<boolean>(true);
+  showActions = input<boolean>(true);
 
   data: DanfeData | null = null;
   errorMessage: string | null = null;
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['xml']?.currentValue) {
-      try {
-        this.data = parseDanfeXml(changes['xml'].currentValue);
-        this.errorMessage = null;
-      } catch (err: any) {
-        console.error('Erro ao parsear XML DANFE:', err);
-        this.errorMessage = err.message || 'Falha ao processar o XML da NF-e/NFC-e';
-        this.data = null;
-      }
-    }
+  ngOnInit() {
+    (pdfMake as any).addVirtualFileSystem(pdfFonts);
+
+    this.data = parseDanfeXml(this.xmlStr());
   }
 
   formatCnpj(cnpj: string | undefined): string {
