@@ -1,0 +1,91 @@
+<div class="danfe-container">
+  @if (errorMessage) {
+    <div class="error">
+      <p>Erro ao processar o XML:</p>
+      <strong>{{ errorMessage }}</strong>
+    </div>
+  }
+
+  @if (showPreview && data) {
+    <div class="preview" [class.nfce-preview]="data.tipo === 'nfce'">
+      <h2>DANFE {{ data.tipo.toUpperCase() }}</h2>
+
+      <div class="emitente">
+        <strong>{{ data.empresa }}</strong><br>
+        CNPJ: {{ formatCnpj(data.cnpj) }}<br>
+        {{ data.endereco }}<br>
+        @if (data.telefone) {
+          Telefone: {{ data.telefone }}
+        }
+      </div>
+
+      <div class="chave">
+        Chave de Acesso:<br>
+        <span>{{ data.chave_de_acesso }}</span>
+      </div>
+
+      <div class="totais">
+        <div>Subtotal: R$ {{ data.subtotal | number:'1.2-2' }}</div>
+        @if (data.discount > 0) {
+          <div>Desconto: -R$ {{ data.discount | number:'1.2-2' }}</div>
+        }
+        @if (data.extra > 0) {
+          <div>Outras despesas: R$ {{ data.extra | number:'1.2-2' }}</div>
+        }
+        <div class="grand-total">Total: R$ {{ data.total | number:'1.2-2' }}</div>
+      </div>
+
+      <table class="produtos">
+        <thead>
+          <tr>
+            <th>Descrição</th>
+            <th>Qtde</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (prod of data.produtos; track $index) {
+            <tr>
+              <td>{{ prod.name }}</td>
+              <td>{{ prod.qty }}</td>
+              <td>R$ {{ prod.total_value | number:'1.2-2' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      @if (data.pagamentos.length > 0) {
+        <div class="pagamentos">
+          <h4>Formas de Pagamento</h4>
+          @for (pag of data.pagamentos; track $index) {
+            <div>
+              {{ pag.payment_method_name }}: R$ {{ pag.value_payed | number:'1.2-2' }}
+            </div>
+          }
+        </div>
+      }
+
+      <div class="footer">
+        <div>Protocolo: {{ data.protocolo_de_autorizacao || 'PENDENTE' }}</div>
+        <div>Emissão: {{ data.dia_e_hora || '—' }}</div>
+        <div>Consumidor: {{ data.consumidor }}</div>
+        @if (data.tributos > 0) {
+          <div>(*) Tributos aproximados: R$ {{ data.tributos | number:'1.2-2' }}</div>
+        }
+      </div>
+    </div>
+  }
+
+  @if (showActions && data) {
+    <div class="actions">
+      <button (click)="downloadPdf()">Baixar PDF</button>
+      <button (click)="print()">Imprimir</button>
+    </div>
+  }
+
+  @if (!data && !errorMessage) {
+    <div class="no-data">
+      <p>Aguardando XML da NF-e / NFC-e...</p>
+    </div>
+  }
+</div>

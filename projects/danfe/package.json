@@ -1,0 +1,30 @@
+{
+  "name": "@aleksandrus/ng-danfe",
+  "version": "0.1.0",
+  "description": "Angular component to generate Brazilian DANFE (NF-e / NFC-e) from XML",
+  "author": "Ariel Aleksandrus <arielaleksandrus@hotmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ArielAleksandrus/ng-danfe.git"
+  },
+  "keywords": [
+    "angular",
+    "danfe",
+    "nfe",
+    "nfce",
+    "brazil",
+    "pdfmake",
+    "thermal-printer"
+  ],
+  "peerDependencies": {
+    "@angular/common": ">=17.0.0 <26.0.0",
+    "@angular/core": ">=17.0.0 <26.0.0",
+    "pdfmake": "^0.2.10",
+    "jsbarcode": "^3.11.6"
+  },
+  "dependencies": {
+    "tslib": "^2.6.0"
+  },
+  "sideEffects": false
+}

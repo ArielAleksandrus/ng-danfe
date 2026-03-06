@@ -1,0 +1,75 @@
+.danfe-container {
+  padding: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.preview {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 24px;
+  border-radius: 8px;
+}
+
+.nfce-preview {
+  max-width: 320px;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+.emitente {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.chave {
+  text-align: center;
+  font-family: monospace;
+  margin: 16px 0;
+  font-size: 13px;
+}
+
+.totais {
+  text-align: right;
+  font-weight: bold;
+  margin: 16px 0;
+}
+
+.grand-total {
+  font-size: 1.2em;
+}
+
+table.produtos {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background: #f5f5f5;
+  }
+}
+
+.actions {
+  text-align: center;
+  margin-top: 24px;
+
+  button {
+    margin: 0 12px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+}
+
+.error {
+  color: red;
+  text-align: center;
+  padding: 16px;
+  border: 1px solid red;
+  background: #ffebee;
+}
